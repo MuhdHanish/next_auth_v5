@@ -1,11 +1,14 @@
-"use client";
+
 import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
 
 export default function Home() {
-  console.log("WHERE AM I");
+  useEffect(() => {
+    console.log('mounted');
+  }, []);
   return (
     <Button size={"lg"}>
       Click me
     </Button>
   );
-}
+};
