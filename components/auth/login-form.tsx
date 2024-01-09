@@ -1,12 +1,12 @@
 "use client";
-import React, { useTransition } from "react";
+import React, { useState, useTransition } from "react";
 import * as z from "zod";
 import { loginSchema } from "@/schemas";
-import { login } from "@/actions/login";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ILoginResponse, login } from "@/actions/login";
 import { CardWrapper } from "@/components/auth/card-wrapper";
 import { FormStatusMessage } from "@/components/form-status-message";
 import {
@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/form";
 
 export const LoginForm = () => {
+  const [response, setResponse] = useState<ILoginResponse|null>(null);
   const [isPending, startIsPendingTransition] = useTransition();
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -28,8 +29,10 @@ export const LoginForm = () => {
     },
   });
   const onSubmit = (values: z.infer<typeof loginSchema>) => {
+    setResponse(null);
     startIsPendingTransition(() => {
-      login(values);
+      login(values)
+        .then((res) => setResponse(res));
     });
   };
 
@@ -80,7 +83,7 @@ export const LoginForm = () => {
               )}
             />
           </div>
-          <FormStatusMessage/>
+          <FormStatusMessage status={response?.status} message={response?.message} />
           <Button disabled={isPending} className="w-full" type="submit">
             Login
           </Button>
