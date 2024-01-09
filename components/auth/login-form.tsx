@@ -5,6 +5,8 @@ import { loginSchema } from "@/schemas";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { FromError } from "@/components/form-error";
+import { FromSuccess } from "@/components/form-success";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CardWrapper } from "@/components/auth/card-wrapper";
 import {
@@ -68,6 +70,8 @@ export const LoginForm = () => {
               )}
             />
           </div>
+          <FromError />
+          <FromSuccess />
           <Button className="w-full" type="submit">
             Login
           </Button>
