@@ -1,14 +1,14 @@
 "use server";
 import * as z from "zod";
-import { loginSchema } from "@/schemas";
+import { registerSchema } from "@/schemas";
 
-export interface ILoginResponse {
+export interface IRegisterResponse {
     status: "error" | "success";
     message: string;
 }
 
-export const login = async (values: z.infer<typeof loginSchema>): Promise<ILoginResponse> => {
-    const validateFields = loginSchema.safeParse(values);
+export const register = async (values: z.infer<typeof registerSchema>): Promise<IRegisterResponse> => {
+    const validateFields = registerSchema.safeParse(values);
     
     if (!validateFields.success) {
         return Promise.resolve({ status: "error", message: "Invalid credentials!" });
