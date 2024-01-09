@@ -16,10 +16,10 @@ export const LoginButton: FC<ILoginButtonProps> = ({ children, mode = "redirect"
     if (mode === "modal") {
         return (
             <span>TODO: Implement modal</span>
-        )
+        );
     }
 
     return (
         <span onClick={onClick} className="cursor-pointer">{children}</span>
-    )
+    );
 };
