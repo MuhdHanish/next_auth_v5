@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/form";
 
 export const LoginForm = () => {
-  const [response, setResponse] = useState<ILoginResponse | null>(null);
+  const [response, setResponse] = useState<ILoginResponse | undefined>(undefined);
   const [isPending, startIsPendingTransition] = useTransition();
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -29,10 +29,10 @@ export const LoginForm = () => {
     },
   });
   const onSubmit = (values: z.infer<typeof loginSchema>) => {
-    setResponse(null);
+    setResponse(undefined);
     startIsPendingTransition(() => {
       login(values)
-        .then((res) => setResponse(res));
+        .then((res) => { if(res) setResponse(res) });
     });
   };
 
