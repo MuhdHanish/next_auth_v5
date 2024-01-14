@@ -1,10 +1,8 @@
 import React from 'react';
-import { auth, signOut } from '@/auth';
+import { signOut } from '@/auth';
 import { Button } from '@/components/ui/button';
 
 const SettingsPage = async () => {
-  const session = await auth();
-  console.log(session);
   return (
     <div>
       <form 
