@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ILoginResponse, login } from "@/actions/login";
 import { CardWrapper } from "@/components/auth/card-wrapper";
-import { FormStatusMessage } from "@/components/form-status-message";
+import { FormStatusMessage } from "@/components/auth/form-status-message";
 import {
   Form,
   FormControl,
